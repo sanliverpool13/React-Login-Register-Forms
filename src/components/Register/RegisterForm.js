@@ -8,14 +8,14 @@ import styles from "./Register.module.css";
 import { Link, useHistory } from "react-router-dom";
 
 
-import cx from 'classnames'
+import cx from 'classnames';
 
 
 // Helpers
 import {   validatePassword, passwordLabel, passwordBarClasses,
     confirmPasswordValidation, confirmedPassword, confirmPasswordLabel,
     confirmedPasswordInputClass,confirmedPasswordLabelClass, validateEmail, emailErrors,
-    nameErrors, validateName } from "./Helpers";
+    nameErrors, validateName, errorCount,allErrors } from "./Helpers";
 
 
 
@@ -29,7 +29,7 @@ const RegisterForm = () => {
 
     });
 
-    // const history = useHistory();
+    const history = useHistory();
     
 
     const {name,email,password,confirmPassword} = formData;
@@ -45,12 +45,17 @@ const RegisterForm = () => {
         setFormData({...formData,[e.target.name]:e.target.value})
     },[formData,password]);
 
+    console.log(allErrors);
     const handleSubmit = useCallback(async (e) => {
         e.preventDefault();
-
+        //validate password one last time
+        console.log(allErrors);
+        if(errorCount() <1){
+            history.push('/dashboard');
+        }
         
         
-    },[]);
+    },[history]);
 
     
     return (

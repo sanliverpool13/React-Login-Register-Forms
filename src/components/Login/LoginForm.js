@@ -6,9 +6,11 @@ import styles from './Login.module.css';
 // Redux, Router Hooks
 import { useHistory, Link } from "react-router-dom";
 
+import cx from 'classnames';
 
 // Helpers
-import { validate } from "./Helpers";
+import { errorCount, validateEmail, emailErrors, allErrors } from "./Helpers";
+
 
 
 const LoginForm = () => {
@@ -25,16 +27,18 @@ const LoginForm = () => {
 
     const handleChange = useCallback((e) => {
         e.preventDefault();
+        if(e.target.name === 'email') validateEmail(e.target.value);
         setFormData({...formData,[e.target.name]:e.target.value})
     },[formData]);
 
     const submitLogin = useCallback(async (e) => {
         e.preventDefault();
+        if(errorCount() <1){
+            history.push('/dashboard');
+        }
 
         
-
-        
-    },[]);
+    },[history]);
 
     
     return (
@@ -43,11 +47,14 @@ const LoginForm = () => {
             <div className={styles.field}>
                 <input type="email" name="email" className={styles.input} placeholder=" " 
                 value={email} onChange={handleChange} autoComplete="off"/>
-                <label htmlFor="email" className={styles.label}>Email</label>
+                 <label htmlFor="email" className={cx(styles.label,emailErrors.class)}>
+                    {emailErrors.label}
+                </label>
             </div>
 
             <div className={styles.field}>
-                <input type="password" name="password" className={styles.input} placeholder=" " value={password} onChange={handleChange}/>
+                <input type="password" name="password" className={styles.input} placeholder=" " 
+                value={password} onChange={handleChange}/>
                 <label htmlFor="password" className={styles.label}>Password</label>
             </div>
             

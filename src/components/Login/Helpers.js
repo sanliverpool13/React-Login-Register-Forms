@@ -1,14 +1,23 @@
 import validator from 'validator';
+import styles from './Login.module.css';
 
-export const validate = (email,password) => {
-    const tempErrors = {};
+// import cxBind from 'classnames/bind';
+// const cx = cxBind.bind(styles);
 
-    if(!validator.isEmail(email)) {
-        tempErrors['email'] = 'Invalid Email!';
+export const allErrors = [true];
+export const errorCount = () => allErrors.reduce((acc,curr) =>  acc+curr);
+
+export const emailErrors = {label:'Email',class:''};
+
+export const validateEmail = (email) => {
+    if(!validator.isEmail(email) && email.length !== 0) {
+        emailErrors.label = "Invalid Email";
+        emailErrors.class = styles.emailLabelError;
+        allErrors.email = true;
+    }else{
+        emailErrors.label = "Email";
+        emailErrors.class = '';
+        allErrors.email = false;
     }
-    if(!validator.isLength(password,{min:10})) {
-        tempErrors['password'] = 'Password must be at least of length 10!';
-    }
-        
-    return tempErrors;
+    
 }

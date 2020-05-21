@@ -6,7 +6,8 @@ import styles from './Register.module.css';
 import cxBind from 'classnames/bind';
 const cx = cxBind.bind(styles);
 
-export let errorCount = 0;
+export const allErrors = [true,true,true,true];
+export const errorCount = () => allErrors.reduce((acc,curr) => acc+curr);
 
 /*
 *   Name Validation, only on Submit
@@ -17,8 +18,11 @@ export const validateName = (name) => {
     if(!validator.isLength(name,{min:1})){
         nameErrors.nameLabelClass = styles.nameLabelError;
         nameErrors.nameLabel = "Enter Name!";
-        errorCount++;
+        allErrors[0] = true;
+    }else{
+        allErrors[0] = false;
     }
+    
     
 }
 
@@ -32,11 +36,11 @@ export const validateEmail = (email) => {
     if(!validator.isEmail(email) && email.length !== 0) {
         emailErrors.label = "Invalid Email";
         emailErrors.class = styles.emailLabelError;
-        errorCount++;
+        allErrors[1] = true;
     }else{
         emailErrors.label = "Email";
         emailErrors.class = '';
-        errorCount--;
+        allErrors[1] = false;
     }
     
 }
@@ -76,27 +80,34 @@ export const validatePassword = (password) => {
         case 0:
             passwordLabel = "Password Very Weak";
             barsShown = {1:false,2:false,3:false,4:false};
+            allErrors[2] = true;
             break;
         case 1:
             passwordLabel = "Password Weak";
             barsShown = {1:true,2:false,3:false,4:false};
+            allErrors[2] = true;
             break;
         case 2:
             passwordLabel = "Password So-so";
             barsShown = {1:true,2:true,3:false,4:false};
+            allErrors[2] = true;
             break;
         case 3:
             passwordLabel = "Password Good";
             barsShown = {1:true,2:true,3:true,4:false};
+            allErrors[2] = true;
             break;
         case 4:
             passwordLabel = "Password Very Good!";
             barsShown = {1:true,2:true,3:true,4:true};
+            allErrors[2] = false;
             break;
         default:
             throw new Error("Invalid Password Strength")
     }
 }
+
+
 
 /*
 *   Confirm Password validation, on every input change
@@ -118,10 +129,12 @@ export const confirmPasswordValidation = (password, confirmPassword) => {
     if(password !== confirmPassword && confirmPassword !== "") {
         confirmedPassword = false;
         confirmPasswordLabel = "Passwords Must Match!";
+        allErrors[3] = true;
     }
     else{ 
         confirmedPassword = true;
         confirmPasswordLabel = "Password";
+        allErrors[3] = false;
     }
     
 }
