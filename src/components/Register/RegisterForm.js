@@ -29,7 +29,7 @@ const RegisterForm = () => {
 
     });
 
-    const history = useHistory();
+    // const history = useHistory();
     
 
     const {name,email,password,confirmPassword} = formData;
