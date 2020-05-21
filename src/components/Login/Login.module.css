@@ -1,0 +1,170 @@
+.loginContainer {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    margin-left: 12%;
+    height: 100%;
+    width: 88%;
+    box-sizing: border-box;
+}
+
+.header {
+    margin-top: 7%;
+    font-size: 3.5rem;
+}
+
+/* .loginForm {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    border: 1px solid black;
+    height: 50%;
+    width: 50%;
+}
+
+.loginForm input {
+    width: 100%;
+    height: 20%;
+    border: none;
+    box-sizing: border-box;
+    border-bottom: 1px solid gray;
+    border-radius: 10px;
+    text-decoration: none;
+    font-size: 150%;
+}
+
+.loginForm input:focus{
+    outline: none;
+}*/
+
+form .button {
+    width: 50%;
+    height: 20%;
+    margin-left: 25%;
+    border-radius: 4px;
+    box-sizing: border-box;
+    background-color: #212121;
+    color: #e0e0e0;
+    font-size: 110%;
+    outline: none;
+    border: none;
+    box-shadow: 0 3px 1px -2px rgba(0, 0, 0,0.2),
+        0px 2px 1px 0px rgba(0,0,0,0.14),
+        0px 1px 5px 0px rgba(0,0,0,0.12);
+    cursor: pointer;
+    transition: background-color 250ms cubic-bezier(0.4, 0, 0.2,1) 0ms,
+        box-shadow 250ms cubic-bezier(0.4,0,0.2,1) 0ms,
+        border 250ms cubic-bezier(0.4,0,0.2,1) 0ms,
+        color 250ms ease;
+
+    text-transform: uppercase;
+}
+
+form .button:hover {
+    background-color: #141414;
+    color: white;
+    box-shadow: 0 3px 2px -2px rgba(0, 0, 0,0.3);
+    
+}
+
+.logError {
+    color: red;
+    height: 5%;
+    font-size: 70%;
+    font-style: italic;
+}
+
+.RegisterLinkContainer {
+    margin-top: 5%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.registerLink {
+    
+    text-decoration: none;
+    color: rgb(103, 103, 253);
+}
+
+
+
+
+/* Style for fireship form */
+form {
+    --text-color: #afafaf;
+    width: 40%;
+}
+
+.field {
+    width: 100%;
+    position: relative;
+    border-bottom: 2px solid var(--text-color);
+    margin: 4rem auto 1rem;
+}
+
+.label {
+    color: var(--text-color);
+    font-size: 1.2rem;
+}
+
+.input{
+    outline: none;
+    border: none;
+    overflow: hidden;
+    margin: 0;
+    width: 100%;
+    padding: 0.25rem 0;
+    background: none;
+    color: black;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.input:valid {
+    color: green;
+}
+
+.input:invalid {
+    color: orangered;
+}
+
+.field::after {
+    content: "";
+    position: relative;
+    display: block;
+    height: 4px;
+    width: 100%;
+    background: #141414;
+    transform: scaleX(0);
+    transform-origin: 0%;
+    transition: transform 500ms ease;
+    top: 2px;
+}
+
+.field:focus-within {
+    border-color: transparent;
+}
+
+.field:focus-within::after {
+    transform: scaleX(1);
+}
+
+/* label animation */
+
+.label {
+    z-index: -1;
+    position: absolute; 
+    left: 0;
+    transform: translateY(-1rem);
+    transform-origin: 0%;
+    transition: transform 400ms;
+}
+
+.field:focus-within .label,
+.input:not(:placeholder-shown) + .label {
+    transform: scale(0.8) translateY(-3rem);
+}
